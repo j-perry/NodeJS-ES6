@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-//let family;
-
 class People extends mongoose.Schema {
 
     constructor() {        
