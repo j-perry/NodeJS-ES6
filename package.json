@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "clean": "rm -r dist/*",
     "start": "npm run build && node dist/server.js",
     "stop": "killall -SIGINT NodeApp",
-    "test": "mocha --compilers js:babel-core/register ./test/**",
-    "test2": "node_modules/.bin/mocha"
+    "test": "mocha --compilers js:babel-core/register ./test/**"
   },
   "author": "",
   "license": "ISC",
