@@ -4,7 +4,7 @@ import expressPromiseRouter from 'express-promise-router';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Promise from 'bluebird';
-import peopleService from './services/people';
+import peopleService from './services/peopleService';
 
 let server;
 let app = express();

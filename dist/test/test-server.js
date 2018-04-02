@@ -14,10 +14,6 @@ var _sinon2 = _interopRequireDefault(_sinon);
 
 require('babel-polyfill');
 
-var _family = require('../models/family');
-
-var _family2 = _interopRequireDefault(_family);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 process.env.NODE_ENV = "test";
@@ -33,7 +29,6 @@ _chai2.default.use(_chaiHttp2.default);
 describe('People', function () {
     describe('/user/create', function () {
         it('should create a new user with parameters passed as path variables', function (done) {
-            var familyMock = _sinon2.default.mock(new _family2.default());
             var firstName = "Bob";
             var lastName = "Marley";
 
@@ -48,17 +43,6 @@ describe('People', function () {
                 name: "Bob",
                 surname: "Marley"
             };
-            // const familyMock = sinon.mock(new Family({ name: user.name, surname: user.surname }));
-            // const family = familyMock.object;
-            // const expectedResult = { status: true };
-
-            // familyMock.expects('find').yields(null, expectedResult);
-            // Family.find(function(err, result) {
-            //     familyMock.verify();
-            //     familyMock.restore();
-            //     expect(result.status).to.be.true;
-            //     done();
-            // });
 
             _chai2.default.request(url).post('/user/create').set("Content-Type", "application/json").send(user).end(function (err, res) {
                 expect(res).to.have.status(200);
@@ -71,38 +55,33 @@ describe('People', function () {
         it('should find all users', function (done) {
             _chai2.default.request(url).get('/findAllUsers').end(function (err, res) {
                 expect(res).to.have.status(200);
-                //expect(res.length).to.be.gt(0);
+                expect(res.body.user.length).to.be.greaterThan(1);
                 expect(res).to.be.a.json;
                 done();
             });
         });
-
-        /* it('should have http status 200', function (done) {
-            //const familyMock = sinon.mock(new Family());
-             chai.request(url)
-                .get('/findAllUsers')
-                .end(function (err, res) {
-                    expect(res).to.have.status(200);
-                    done();
-                });
-        });
-         it('should be a json object', (done) => {
-            const familyMock = sinon.mock(new Family());
-             chai.request(url)
-                .get('/findAllUsers')
-                .end(function (err, res) {
-                    expect(res).to.be.a.json;
-                    done();
-                });
-        }); */
     });
 
-    describe('/findUser/:name', function () {
+    describe('/findUser', function () {
+        it('should find a user by their first name', function (done) {
+            var name = "Bob";
+
+            _chai2.default.request(url).get('/findUser/' + name).end(function (err, res) {
+                expect(res).to.be.a.json;
+                expect(res).to.have.status(200);
+                expect(res.body.user.length).to.be.greaterThan(1);
+                done();
+            });
+        });
+
         it('should find a user by their first and second name', function (done) {
+            var name = "Bob";
+            var surname = "Marley";
+
             _chai2.default.request(url).get('/findUser/' + name + '/' + surname).end(function (err, res) {
                 expect(res).to.be.a.json;
                 expect(res).to.have.status(200);
-                expect(res.body).to.have.length.greaterThan(0);
+                expect(res.body.user.length).to.be.greaterThan(1);
                 done();
             });
         });
@@ -110,17 +89,11 @@ describe('People', function () {
 
     describe('/user/update', function () {
         it('should update a user object(s)', function (done) {
-            var familyMock = _sinon2.default.mock(new _family2.default());
-            var origFirstname = "Bob";
-            var origSurname = "Marley";
-            var newName = "Paul";
-            var newSurname = "McCartney";
-
             var user = {
-                origFirstname: origFirstname,
-                origSurname: origSurname,
-                newName: newName,
-                newSurname: newSurname
+                origFirstname: "Bob",
+                origSurname: "Marley",
+                newName: "Paul",
+                newSurname: "McCartney"
             };
 
             _chai2.default.request(url).put('/user/update').set("Content-Type", "application/json").send(user).end(function (err, res) {
@@ -132,8 +105,6 @@ describe('People', function () {
 
     describe('/user/delete', function () {
         it('should delete a user object(s)', function (done) {
-            var familyMock = _sinon2.default.mock(new _family2.default());
-            var id = 1;
             var user = {
                 name: "Paul",
                 surname: "McCartney"

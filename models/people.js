@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-let family;
+//let family;
 
-class Family extends mongoose.Schema {
+class People extends mongoose.Schema {
 
     constructor() {        
         super({
@@ -10,10 +10,10 @@ class Family extends mongoose.Schema {
             surname: String
         },
         {
-            collection: 'saturday'
+            collection: 'es6'
         });
     }
 
 }
 
-export default mongoose.model('Family', new Family);
+export default mongoose.model('People', new People);

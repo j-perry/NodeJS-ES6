@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import 'babel-polyfill';
 const server = require('../server').app;
 
-import Family from '../models/family';
 let expect = chai.expect;
 
 const url = "http://localhost:3000/People/api";
@@ -16,7 +15,6 @@ chai.use(chaiHttp);
 describe('People', () => {
     describe('/user/create', () => {
         it('should create a new user with parameters passed as path variables', (done) => {
-            const familyMock = sinon.mock(new Family());
             const firstName = "Bob";
             const lastName = "Marley";
 
@@ -89,17 +87,11 @@ describe('People', () => {
     
     describe('/user/update', () => {
         it('should update a user object(s)', (done) => {
-            const familyMock = sinon.mock(new Family());
-            const origFirstname = "Bob";
-            const origSurname = "Marley";
-            const newName = "Paul";
-            const newSurname = "McCartney";
-
             const user = {
-                origFirstname: origFirstname,
-                origSurname: origSurname,
-                newName: newName,
-                newSurname: newSurname
+                origFirstname: "Bob",
+                origSurname: "Marley",
+                newName: "Paul",
+                newSurname: "McCartney"
             }
 
             chai.request(url)
@@ -115,8 +107,6 @@ describe('People', () => {
 
     describe('/user/delete', () => {
         it('should delete a user object(s)', (done) => {
-            const familyMock = sinon.mock(new Family());
-            const id = 1;
             const user = {
                 name: "Paul",
                 surname: "McCartney"

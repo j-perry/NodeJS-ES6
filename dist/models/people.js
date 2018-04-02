@@ -16,23 +16,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var family = void 0;
+//let family;
 
-var Family = function (_mongoose$Schema) {
-    _inherits(Family, _mongoose$Schema);
+var People = function (_mongoose$Schema) {
+    _inherits(People, _mongoose$Schema);
 
-    function Family() {
-        _classCallCheck(this, Family);
+    function People() {
+        _classCallCheck(this, People);
 
-        return _possibleConstructorReturn(this, (Family.__proto__ || Object.getPrototypeOf(Family)).call(this, {
+        return _possibleConstructorReturn(this, (People.__proto__ || Object.getPrototypeOf(People)).call(this, {
             name: String,
             surname: String
         }, {
-            collection: 'saturday'
+            collection: 'es6'
         }));
     }
 
-    return Family;
+    return People;
 }(_mongoose2.default.Schema);
 
-exports.default = _mongoose2.default.model('Family', new Family());
+exports.default = _mongoose2.default.model('People', new People());

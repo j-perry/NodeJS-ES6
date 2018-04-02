@@ -20,9 +20,9 @@ var _bluebird = require('bluebird');
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
-var _people = require('./services/people');
+var _peopleService = require('./services/peopleService');
 
-var _people2 = _interopRequireDefault(_people);
+var _peopleService2 = _interopRequireDefault(_peopleService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32,7 +32,7 @@ var router = _express2.default.Router();
 var server = void 0;
 var app = (0, _express2.default)();
 
-var peopleSrv = new _people2.default();
+var peopleSrv = new _peopleService2.default();
 
 _bluebird2.default.promisifyAll(peopleSrv);
 
