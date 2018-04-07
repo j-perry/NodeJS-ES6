@@ -26,6 +26,8 @@ export default class PeopleService {
   }
 
   async findAllUsers() {
+    console.log("findAllUsers");
+
     return People.find({}, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
@@ -34,6 +36,8 @@ export default class PeopleService {
   }
 
   async findUserByFirstName(name) {
+    console.log("findUserByFirstName");
+
     return People.find({name: name}, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
@@ -42,6 +46,8 @@ export default class PeopleService {
   }
 
   async findUserByFirstNameAndSecondName(name, surname) {
+    console.log("findUserByFirstNameAndSecondName");
+
     return People.find({ name: name, surname: surname }, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
@@ -78,6 +84,8 @@ export default class PeopleService {
   }
 
   async deletePerson(name, surname) {
+    console.log("deletePerson");
+
     return People.remove({ name: name, surname: surname }).then((err, user) => {
       return 200;
     }).catch((e) => {
