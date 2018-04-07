@@ -104,7 +104,6 @@ router.put('/user/update', async function (req, res) {
           req.body.origSurname,
           req.body.newName,
           req.body.newSurname);
-          console.log("/update" + JSON.stringify(response));
         res.sendStatus(response);
     } else {
       res.sendStatus(500);
@@ -121,7 +120,6 @@ router.delete('/user/delete', async function (req, res) {
     if (req.body.name &&
         req.body.surname) {
         let response = await peopleSrv.deletePerson(req.body.name, req.body.surname);
-        console.log("delete: " + response);
         res.sendStatus(response);
     } else {
       res.sendStatus(500);
