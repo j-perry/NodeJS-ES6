@@ -108,7 +108,7 @@ describe('People', () => {
                 .get(`/findUser/${name}`)
                 .end(function (err, res) {
                     expect(res).to.have.status(200);
-                    //expect(res.body.user.length).to.eql(0);
+                    expect(res.body.user.length).to.eql(0);
                     done();
                 });
         });
@@ -210,8 +210,5 @@ describe('People', () => {
                     done();
                 });
         });
-
-
     });
-
 });

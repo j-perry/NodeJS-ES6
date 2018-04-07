@@ -26,7 +26,7 @@ export default class PeopleService {
   }
 
   async findAllUsers() {
-    return People.find({}, excludeFields).then(function(user) {
+    return People.find({}, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
       return err;
@@ -34,7 +34,7 @@ export default class PeopleService {
   }
 
   async findUserByFirstName(name) {
-    return People.find({name: name}, excludeFields).then(function(user) {
+    return People.find({name: name}, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
       return err;
@@ -42,7 +42,7 @@ export default class PeopleService {
   }
 
   async findUserByFirstNameAndSecondName(name, surname) {
-    return People.find({ name: name, surname: surname }, excludeFields).then(function(user) {
+    return People.find({ name: name, surname: surname }, excludeFields).then((user) => {
       return { user: user };
     }).catch(function(err) {
       return err;
@@ -57,44 +57,30 @@ export default class PeopleService {
     people.surname = surname;
     console.log("people: " + people);
 
-    return people.save().then(function(err, people) {
+    return people.save().then((err, people) => {
       return 200;
-    }).catch(function(err) {
+    }).catch((err) => {
       return 404;
     });
   }
 
   async updatePerson (origName, origSurname, newName, newSurname) {
     console.log("updatePerson");
-    let people = new People();
-    const objToUpdate = {};
-
-    if (newName)
-      objToUpdate.newName = newName;
-    if (newSurname)
-      objToUpdate.newSurname = newSurname;
-
-    console.log(`origName ${origName}`);
-    console.log(`origSurname ${origSurname}`);
-    console.log(`newName ${newName}`);
-    console.log(`newSurname ${newSurname}`);
-
-    const setObj = objToUpdate;
 
     return People.update(
       { name: origName, surname: origSurname },
       { name: newName, surname: newSurname },
-      { multi: true }).then(function(err, page) {
+      { multi: true }).then((err, page) => {
         return 200;
-      }).catch(function(e) {
+      }).catch((e) => {
         return 404;
       });
   }
 
   async deletePerson(name, surname) {
-    return People.remove({ name: name, surname: surname }).then(function(err, user) {
+    return People.remove({ name: name, surname: surname }).then((err, user) => {
       return 200;
-    }).catch(function(e) {
+    }).catch((e) => {
       return 404;
     });
   }

@@ -94,18 +94,6 @@ var PeopleService = function () {
     key: 'updatePerson',
     value: async function updatePerson(origName, origSurname, newName, newSurname) {
       console.log("updatePerson");
-      var people = new _people2.default();
-      var objToUpdate = {};
-
-      if (newName) objToUpdate.newName = newName;
-      if (newSurname) objToUpdate.newSurname = newSurname;
-
-      console.log('origName ' + origName);
-      console.log('origSurname ' + origSurname);
-      console.log('newName ' + newName);
-      console.log('newSurname ' + newSurname);
-
-      var setObj = objToUpdate;
 
       return _people2.default.update({ name: origName, surname: origSurname }, { name: newName, surname: newSurname }, { multi: true }).then(function (err, page) {
         return 200;

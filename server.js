@@ -41,7 +41,6 @@ router.route('/').get((req, res) => {
  ************************************************************/
 router.get('/findAllUsers', async function (req, res) {
   try {
-    let test = { "name": "Jonathan" };
     let response = await peopleSrv.findAllUsers();
     res.json(response);
   } catch (err) {

@@ -150,9 +150,6 @@ router.delete('/user/delete', async function (req, res) {
   } else {
     res.sendStatus(500);
   }
-  //} catch (err) {
-  //  res.sendStatus(err);
-  //}
 });
 
 if (!module.parent) {
