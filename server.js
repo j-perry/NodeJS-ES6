@@ -95,43 +95,39 @@ router.post('/user/create', async function (req, res) {
 /* http://localhost:3000/People/api/user/update
  ***************************************************************************/
 router.put('/user/update', async function (req, res) {
-  if (req.body.origFirstname &&
-    req.body.origSurname &&
-    req.body.newName &&
-    req.body.newSurname) {
-      let response = await peopleSrv.updatePerson(req.body.origFirstname,
-        req.body.origSurname,
-        req.body.newName,
-        req.body.newSurname);
-        console.log("/update" + JSON.stringify(response));
-      res.sendStatus(response);
-  } else {
-    res.sendStatus(500);
+  try {
+    if (req.body.origFirstname &&
+      req.body.origSurname &&
+      req.body.newName &&
+      req.body.newSurname) {
+        let response = await peopleSrv.updatePerson(req.body.origFirstname,
+          req.body.origSurname,
+          req.body.newName,
+          req.body.newSurname);
+          console.log("/update" + JSON.stringify(response));
+        res.sendStatus(response);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (err) {
+    res.sendStatus(JSON.stringify(err));
   }
-
-  // try {
-  //   let response = await peopleSrv.updatePerson(req.body.origFirstname,
-  //     req.body.origSurname,
-  //     req.body.newName,
-  //     req.body.newSurname);
-  //     console.log("/update" + JSON.stringify(response));
-  //   res.sendStatus(response);
-  // } catch (err) {
-  //   res.sendStatus(JSON.stringify(err));
-  // }
 });
 
 /* http://localhost:3000/People/api/user/delete
  ***********************************************************************************/
 router.delete('/user/delete', async function (req, res) {
-  //try {
+  try {
     if (req.body.name &&
-      req.body.surname) {
-      let response = await peopleSrv.deletePerson(req.body.name, req.body.surname);
-      console.log("delete: " + response);
-      res.sendStatus(response);
-  } else {
-    res.sendStatus(500);
+        req.body.surname) {
+        let response = await peopleSrv.deletePerson(req.body.name, req.body.surname);
+        console.log("delete: " + response);
+        res.sendStatus(response);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch(err) {
+    res.sendStatus(JSON.stringify(err));
   }
 });
 
