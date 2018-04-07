@@ -1,6 +1,7 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
 import People from '../models/people';
+import { setTimeout } from 'timers';
 
 let url = "mongodb://127.0.0.1/saturday";
 
@@ -25,21 +26,26 @@ export default class PeopleService {
   }
 
   async findAllUsers() {
-    return Promise.all([People.find({}, excludeFields)]).spread(function(user) {
-      console.log("user: " + user);
+    return People.find({}, excludeFields).then(function(user) {
       return { user: user };
+    }).catch(function(err) {
+      return err;
     });
   }
 
   async findUserByFirstName(name) {
-    return Promise.all([People.find({name: name}, excludeFields)]).spread(function(user) {
+    return People.find({name: name}, excludeFields).then(function(user) {
       return { user: user };
+    }).catch(function(err) {
+      return err;
     });
   }
 
   async findUserByFirstNameAndSecondName(name, surname) {
-    return Promise.all([People.find({name: name, surname: surname}, excludeFields)]).spread(function(user) {
+    return People.find({ name: name, surname: surname }, excludeFields).then(function(user) {
       return { user: user };
+    }).catch(function(err) {
+      return err;
     });
   }
 
@@ -51,41 +57,46 @@ export default class PeopleService {
     people.surname = surname;
     console.log("people: " + people);
 
-    return Promise.all([people.save()]).spread(function(success) {
-      if (success)
-        return 200;
-      else
-        return 404;
+    return people.save().then(function(err, people) {
+      return 200;
+    }).catch(function(err) {
+      return 404;
     });
   }
 
   async updatePerson (origName, origSurname, newName, newSurname) {
     console.log("updatePerson");
     let people = new People();
+    const objToUpdate = {};
 
-    return Promise.all([People.update(
+    if (newName)
+      objToUpdate.newName = newName;
+    if (newSurname)
+      objToUpdate.newSurname = newSurname;
+
+    console.log(`origName ${origName}`);
+    console.log(`origSurname ${origSurname}`);
+    console.log(`newName ${newName}`);
+    console.log(`newSurname ${newSurname}`);
+
+    const setObj = objToUpdate;
+
+    return People.update(
       { name: origName, surname: origSurname },
       { name: newName, surname: newSurname },
-      { multi: true }
-      )], function(err) {
-        if (!err) {
-          console.log(`numAffected`);
-          return "updated"; //next(numAffected);
-        }
-        else {
-          console.log("err");
-          return err;
-        }
-    });
+      { multi: true }).then(function(err, page) {
+        return 200;
+      }).catch(function(e) {
+        return 404;
+      });
   }
 
   async deletePerson(name, surname) {
-    return Promise.all([People.remove({ name: name, surname: surname }, function(err) {
-      if (err)
-        return handleError(err);
-      else
-        return 200;
-    })]);
+    return People.remove({ name: name, surname: surname }).then(function(err, user) {
+      return 200;
+    }).catch(function(e) {
+      return 404;
+    });
   }
 
 }

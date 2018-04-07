@@ -1,37 +1,60 @@
-import express from 'express';
-let router = express.Router();
-import expressPromiseRouter from 'express-promise-router';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import Promise from 'bluebird';
-import peopleService from './services/peopleService';
+'use strict';
 
-let server;
-let app = express();
+var _express = require('express');
 
-let peopleSrv = new peopleService();
+var _express2 = _interopRequireDefault(_express);
 
-Promise.promisifyAll(peopleSrv);
+var _expressPromiseRouter = require('express-promise-router');
 
-let port = process.env.PORT || (process.argv[2]) || 3000;
-port = (typeof port === "number") ? port : 3000;
+var _expressPromiseRouter2 = _interopRequireDefault(_expressPromiseRouter);
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+var _peopleService = require('./services/peopleService');
+
+var _peopleService2 = _interopRequireDefault(_peopleService);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
+
+
+var server = void 0;
+var app = (0, _express2.default)();
+
+var peopleSrv = new _peopleService2.default();
+
+_bluebird2.default.promisifyAll(peopleSrv);
+
+var port = process.env.PORT || process.argv[2] || 3000;
+port = typeof port === "number" ? port : 3000;
 process.title = "NodeApp";
 
-app.use(bodyParser.urlencoded({
+app.use(_bodyParser2.default.urlencoded({
   extended: true
 }));
 
-app.use(bodyParser.json({
+app.use(_bodyParser2.default.json({
   type: "application/json"
 }));
-app.use(express.static('public'));
+app.use(_express2.default.static('public'));
 
 // public html files are separate from the APIs
 app.use('/People/api', router);
 
 console.log("Magic happens on port " + port);
 
-router.route('/').get((req, res) => {
+router.route('/').get(function (req, res) {
   res.json({
     message: 'hello!'
   });
@@ -41,8 +64,8 @@ router.route('/').get((req, res) => {
  ************************************************************/
 router.get('/findAllUsers', async function (req, res) {
   try {
-    let test = { "name": "Jonathan" };
-    let response = await peopleSrv.findAllUsers();
+    var test = { "name": "Jonathan" };
+    var response = await peopleSrv.findAllUsers();
     res.json(response);
   } catch (err) {
     res.sendStatus(err);
@@ -53,7 +76,7 @@ router.get('/findAllUsers', async function (req, res) {
  ************************************************************/
 router.get('/findUser/:name', async function (req, res) {
   try {
-    let response = await peopleSrv.findUserByFirstName(req.params.name);
+    var response = await peopleSrv.findUserByFirstName(req.params.name);
     res.json(response);
   } catch (err) {
     res.sendStatus(err);
@@ -64,7 +87,7 @@ router.get('/findUser/:name', async function (req, res) {
 *********************************************************************/
 router.get('/findUser/:name/:surname', async function (req, res) {
   try {
-    let response = await peopleSrv.findUserByFirstNameAndSecondName(req.params.name, req.params.surname);
+    var response = await peopleSrv.findUserByFirstNameAndSecondName(req.params.name, req.params.surname);
     res.json(response);
   } catch (err) {
     res.sendStatus(err);
@@ -75,7 +98,7 @@ router.get('/findUser/:name/:surname', async function (req, res) {
  ************************************************************/
 router.post('/user/create/:name/:surname', async function (req, res) {
   try {
-    let response = await peopleSrv.insertPerson(req.params.name, req.params.surname);
+    var response = await peopleSrv.insertPerson(req.params.name, req.params.surname);
     res.sendStatus(response);
   } catch (err) {
     res.sendStatus(err);
@@ -86,7 +109,7 @@ router.post('/user/create/:name/:surname', async function (req, res) {
  ************************************************************/
 router.post('/user/create', async function (req, res) {
   try {
-    let response = await peopleSrv.insertPerson(req.body.name, req.body.surname);
+    var response = await peopleSrv.insertPerson(req.body.name, req.body.surname);
     res.sendStatus(response);
   } catch (err) {
     res.sendStatus(err);
@@ -96,16 +119,10 @@ router.post('/user/create', async function (req, res) {
 /* http://localhost:3000/People/api/user/update
  ***************************************************************************/
 router.put('/user/update', async function (req, res) {
-  if (req.body.origFirstname &&
-    req.body.origSurname &&
-    req.body.newName &&
-    req.body.newSurname) {
-      let response = await peopleSrv.updatePerson(req.body.origFirstname,
-        req.body.origSurname,
-        req.body.newName,
-        req.body.newSurname);
-        console.log("/update" + JSON.stringify(response));
-      res.sendStatus(response);
+  if (req.body.origFirstname && req.body.origSurname && req.body.newName && req.body.newSurname) {
+    var response = await peopleSrv.updatePerson(req.body.origFirstname, req.body.origSurname, req.body.newName, req.body.newSurname);
+    console.log("/update" + JSON.stringify(response));
+    res.sendStatus(response);
   } else {
     res.sendStatus(500);
   }
@@ -126,14 +143,16 @@ router.put('/user/update', async function (req, res) {
  ***********************************************************************************/
 router.delete('/user/delete', async function (req, res) {
   //try {
-    if (req.body.name &&
-      req.body.surname) {
-      let response = await peopleSrv.deletePerson(req.body.name, req.body.surname);
-      console.log("delete: " + response);
-      res.sendStatus(response);
+  if (req.body.name && req.body.surname) {
+    var response = await peopleSrv.deletePerson(req.body.name, req.body.surname);
+    console.log("delete: " + response);
+    res.sendStatus(response);
   } else {
     res.sendStatus(500);
   }
+  //} catch (err) {
+  //  res.sendStatus(err);
+  //}
 });
 
 if (!module.parent) {
