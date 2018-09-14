@@ -1,8 +1,6 @@
 import express from 'express';
 let router = express.Router();
-import expressPromiseRouter from 'express-promise-router';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
 import Promise from 'bluebird';
 import peopleService from './services/peopleService';
 
