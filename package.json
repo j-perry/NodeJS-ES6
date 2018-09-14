@@ -44,6 +44,9 @@
     ]
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0"
+    "@babel/polyfill": "^7.0.0",
+    "lodash": "^4.17.11",
+    "node-growl": "^0.1.1",
+    "superagent": "^3.8.3"
   }
 }
