@@ -6,18 +6,18 @@ You'll need to install Robomongo, then create a database named 'saturday' and a 
 
 Install/use Postman to manually test the API endpoints.
 
-****Setup:
+****Setup****:
 
 `npm i`
 
-****Run:
+****Run****:
 
 `npm start`
 
-****Stop:
+****Stop****:
 
 `npm stop`
 
-****Tests:
+****Tests****:
 
 `npm test`
