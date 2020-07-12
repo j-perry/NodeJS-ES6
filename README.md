@@ -1,3 +1,5 @@
+**NodeJS-ES6**
+
 This project demonstrates how to apply ES6 JS to a NodeJS project using Babel, Express and Bluebird (Promises). It also supports automated tests using Mocha and Chai (TDD/BDD).
 
 It is recommended you view the project inside Visual Studio Code.
