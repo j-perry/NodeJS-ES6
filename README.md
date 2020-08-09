@@ -6,7 +6,7 @@ It is recommended you view the project inside [Visual Studio Code](https://code.
 
 You'll need to install [Robomongo](https://robomongo.org/), then create a database named `'people'` and a collection named `'es6'`.
 
-Install/use [Postman](https://www.postman.com/) to manually test the API endpoints.
+Install and use [Postman](https://www.postman.com/) to manually test the API endpoints.
 
 ****Setup****
 
