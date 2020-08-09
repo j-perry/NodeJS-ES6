@@ -4,7 +4,7 @@ This project demonstrates how to apply ES6 JS to a NodeJS project using Babel, E
 
 It is recommended you view the project inside [Visual Studio Code](https://code.visualstudio.com/).
 
-You'll need to install Robomongo, then create a database named `'people'` and a collection named `'es6'`.
+You'll need to install [Robomongo](https://robomongo.org/), then create a database named `'people'` and a collection named `'es6'`.
 
 Install/use [Postman](https://www.postman.com/) to manually test the API endpoints.
 
