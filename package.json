@@ -28,7 +28,7 @@
     "express-promise-router": "^3.0.1",
     "mocha": "^3.5.3",
     "mongojs": "^2.4.0",
-    "mongoose": "^4.6.0",
+    "mongoose": "^5.7.5",
     "nock": "^9.1.5",
     "promise": "^7.1.1",
     "q": "^1.4.1",
