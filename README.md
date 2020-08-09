@@ -20,5 +20,5 @@ Tests: `npm test`
 
 ****Postman****
 
-`http://localhost:3000/People/api/user/`
+`http://localhost:3000/People/api/user/`\
 `http://localhost:3000/People/api/user/<endpoint>`
