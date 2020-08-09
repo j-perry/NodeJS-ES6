@@ -8,12 +8,17 @@ You'll need to install Robomongo, then create a database named `'people'` and a 
 
 Install/use Postman to manually test the API endpoints.
 
-****Setup****:
+****Setup****
 
 `npm i`
 
-****Usage****:
+****Usage****
 
 Run: `npm start`\
 Stop: `npm stop`\
 Tests: `npm test`
+
+****Postman****
+
+`http://localhost:3000/People/api/user/`
+`http://localhost:3000/People/api/user/<endpoint>`
