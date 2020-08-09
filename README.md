@@ -15,5 +15,7 @@ Install/use Postman to manually test the API endpoints.
 ****Usage****:
 
 Run: `npm start`
+
 Stop: `npm stop`
+
 Tests: `npm test`
