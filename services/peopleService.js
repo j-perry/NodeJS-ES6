@@ -1,13 +1,12 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
 import People from '../models/people';
-import { setTimeout } from 'timers';
 
-let url = "mongodb://127.0.0.1/saturday";
+let url = "mongodb://127.0.0.1/people";
 
 const excludeFields = '-_id -__v';
 
-export default class PeopleService {
+class PeopleService {
 
   constructor() {
     Promise.promisifyAll(mongoose);
@@ -94,3 +93,5 @@ export default class PeopleService {
   }
 
 }
+
+export default PeopleService;
