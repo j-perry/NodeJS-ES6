@@ -1,11 +1,11 @@
 import "@babel/polyfill";
 import express from 'express';
-let router = express.Router();
 import bodyParser from 'body-parser';
 import Promise from 'bluebird';
 import peopleService from './services/peopleService';
 
 let server;
+let router = express.Router();
 let app = express();
 
 let peopleSrv = new peopleService();
