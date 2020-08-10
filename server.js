@@ -47,9 +47,9 @@ router.get('/findAllUsers', async function (req, res) {
   }
 });
 
-/* http://localhost:3000/People/api/findUser/:name
+/* http://localhost:3000/People/api/find/:name
  ************************************************************/
-router.get('/findUser/:name', async function (req, res) {
+router.get('/find/:name', async function (req, res) {
   try {
     let response = await peopleSrv.findUserByFirstName(req.params.name);
     res.json(response);
@@ -58,9 +58,9 @@ router.get('/findUser/:name', async function (req, res) {
   }
 });
 
-/* http://localhost:3000/People/api/findUser/:name/:surname
+/* http://localhost:3000/People/api/find/:name/:surname
 *********************************************************************/
-router.get('/findUser/:name/:surname', async function (req, res) {
+router.get('/find/:name/:surname', async function (req, res) {
   try {
     let response = await peopleSrv.findUserByFirstNameAndSecondName(req.params.name, req.params.surname);
     res.json(response);
@@ -69,20 +69,9 @@ router.get('/findUser/:name/:surname', async function (req, res) {
   }
 });
 
-/* http://localhost:3000/People/api/user/create/:name/:surname
+/* http://localhost:3000/People/api/user
  ************************************************************/
-router.post('/user/create/:name/:surname', async function (req, res) {
-  try {
-    let response = await peopleSrv.insertPerson(req.params.name, req.params.surname);
-    res.sendStatus(response);
-  } catch (err) {
-    res.sendStatus(err);
-  }
-});
-
-/* http://localhost:3000/People/api/user/create
- ************************************************************/
-router.post('/user/create', async function (req, res) {
+router.post('/user/', async function (req, res) {
   try {
     let response = await peopleSrv.insertPerson(req.body.name, req.body.surname);
     res.sendStatus(response);
@@ -91,9 +80,9 @@ router.post('/user/create', async function (req, res) {
   }
 });
 
-/* http://localhost:3000/People/api/user/update
+/* http://localhost:3000/People/api/user
  ***************************************************************************/
-router.put('/user/update', async function (req, res) {
+router.put('/user', async function (req, res) {
   try {
     if (req.body.origFirstname &&
       req.body.origSurname &&
@@ -112,9 +101,9 @@ router.put('/user/update', async function (req, res) {
   }
 });
 
-/* http://localhost:3000/People/api/user/delete
+/* http://localhost:3000/People/api/user
  ***********************************************************************************/
-router.delete('/user/delete', async function (req, res) {
+router.delete('/user', async function (req, res) {
   try {
     if (req.body.name &&
         req.body.surname) {
